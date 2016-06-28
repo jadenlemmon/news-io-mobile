@@ -1,0 +1,29 @@
+<div class="app">
+
+    <div class="ui thin sidebar visible" id="sidebar" ng-class="{'hidden': sidebarToggle}">
+        <div id="logo">
+            <a href="/">
+                <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-green-abb.png"
+                     class="img-responsive">
+            </a>
+        </div>
+        <div class="item" ng-class="{'active': !articleFilter && !showSaved}">
+            <a href="#" ng-click="filterArticles(false)">All</a>
+        </div>
+        <div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">
+            <a href="#" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>
+        </div>
+    </div>
+
+    <div id="feed-stream">
+        <div class="ui container">
+            <div ng-repeat="article in articles" class="list-article">
+                <div class="ui fluid card">
+                    <div class="content">
+                        <article article="article" view="false"></article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

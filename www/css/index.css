@@ -1,0 +1,44 @@
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+div[ng-view] {
+    height: 100%;
+}
+#logo img {
+    width: 30px;
+}
+
+.ui.fluid.card img {
+    max-width: 100%;
+    height: auto;
+}
+.ui.fluid.card {
+    border-radius: 0;
+    margin: 15px 0;
+}
+#sidebar {
+    width: 45px;
+    padding: 10px;
+    background: #EEE;
+}
+#sidebar img {
+    width: 25px;
+}
+#sidebar .item {
+    margin: 10px 0;
+}
+#feed-stream {
+    margin-left: 45px;
+}
+
+#welcome {
+    background: #21BA45;
+    height: 100%;
+}
+#welcome img {
+    width: 100%;
+    margin-top: 200px;
+}
+#welcome form {
+
+}
