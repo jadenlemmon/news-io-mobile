@@ -22,22 +22,27 @@
     <title>SnugFeed</title>
 </head>
 
-<body ng-app="app">
+<body>
     <div ng-view></div>
+
+
+    <script src="js/env.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="js/Directives/Article.js"></script>
+    <script src="js/Controllers/Main.js"></script>
+    <script src="js/Services/ArticleService.js"></script>
+    <script src="js/Services/UserService.js"></script>
+    <script src="js/Functions.js"></script>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
     </script>
-    <script src="js/env.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-route.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-sanitize.js"></script>
-    <script src="js/Directives/Article.js"></script>
-    <script src="js/Controllers/Main.js"></script>
-    <script src="js/Services/ArticleService.js"></script>
-    <script src="js/Services/UserService.js"></script>
 </body>
 
 </html>

@@ -2,20 +2,31 @@
 
 (function(angular) {
     angular.module('snugfeed.service.user', ['env'])
-        .service('snugfeedUserService', [ "$http", function ($http) {
+        .service('snugfeedUserService', function ($http,$q,$timeout) {
 
-            this.api_token = '';
+            var api_token = localStorage.getItem('api_token') || '';
 
             var setApiToken = function(token) {
-                this.api_token = token;
-            }.bind(this);
+                localStorage.setItem('api_token', token);
+                api_token = token;
+            };
 
             var getApiToken = function() {
-                return this.api_token;
-            }.bind(this);
+                return api_token;
+            };
 
             var loginUser = function (login) {
                 return $http.post(__env.apiUrl+'user/login', login);
+            };
+
+            var logoutUser = function() {
+                var deferred = $q.defer();
+                localStorage.removeItem('api_token');
+                api_token = '';
+                $timeout(function() {
+                    deferred.resolve();
+                },500);
+                return deferred.promise;
             };
             //
             //var registerUser = function (register) {
@@ -23,8 +34,8 @@
             //};
 
             var getUserStatus = function () {
-                return $http.get(__env.apiUrl+'user/status?api_token='+this.api_token);
-            }.bind(this);
+                return $http.get(__env.apiUrl+'user/status?api_token='+api_token);
+            };
 
             return {
                 loginUser: loginUser,
@@ -32,8 +43,9 @@
                 getUserStatus: getUserStatus,
                 setApiToken: setApiToken,
                 getApiToken: getApiToken,
-                api_token: this.api_token
+                api_token: api_token,
+                logoutUser: logoutUser
             };
 
-        }]);
+        });
 })(angular);

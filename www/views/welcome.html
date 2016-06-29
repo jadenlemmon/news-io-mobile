@@ -1,6 +1,11 @@
 <div id="welcome">
-    <div class="ui container">
+    <div class="ui container center aligned">
         <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-white.png">
+
+        <div class="ui ignored error message" ng-show="error">
+            Your email or password is invalid!
+        </div>
+
         <form class="ui large form" ng-submit="submitLogin($event,login)" id="login-form">
             <div class="ui">
                 <div class="field">

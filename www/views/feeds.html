@@ -1,29 +1,73 @@
 <div class="app">
 
-    <div class="ui thin sidebar visible" id="sidebar" ng-class="{'hidden': sidebarToggle}">
-        <div id="logo">
-            <a href="/">
-                <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-green-abb.png"
-                     class="img-responsive">
-            </a>
-        </div>
-        <div class="item" ng-class="{'active': !articleFilter && !showSaved}">
-            <a href="#" ng-click="filterArticles(false)">All</a>
-        </div>
-        <div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">
-            <a href="#" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>
+    <div id="settings-overlay" ng-show="showSettings">
+        <div class="ui container">
+            <i class="remove circle outline icon pointer" ng-click="toggleSettings()"></i>
+
+            <div class="content">
+                <button class="ui button" ng-click="logout()">Logout</button>
+            </div>
         </div>
     </div>
 
-    <div id="feed-stream">
-        <div class="ui container">
-            <div ng-repeat="article in articles" class="list-article">
-                <div class="ui fluid card">
-                    <div class="content">
-                        <article article="article" view="false"></article>
+    <div id="top-bar">
+        <div id="logo">
+            <a href="/">
+                <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-grey-abb.png"
+                     class="img-responsive">
+            </a>
+        </div>
+        <i class="setting icon pointer" ng-click="toggleSettings()"></i>
+        <div class="avatar">{{user.initials}}</div>
+    </div>
+
+    <div class="push">
+        <div class="ui thin sidebar visible" id="sidebar">
+            <div class="item" ng-class="{'active': !articleFilter && !showSaved}">
+                <a href="#feeds" ng-click="filterArticles(false)">All</a>
+            </div>
+            <div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">
+                <a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>
+            </div>
+        </div>
+
+        <div id="feed-stream">
+            <div class="ui container">
+                <div ng-repeat="article in articles" class="list-article">
+                    <div class="ui fluid card">
+                        <div class="content">
+                            <article article="article" view="articleView"></article>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="utility-bar">
+        <div class="">
+            <!--<div id="user-manage-menu">-->
+                <!--<div class="avatar">{{user.initials}}</div><span class="name">{{user.name}}</span>-->
+                <!--<div class="popout">-->
+                    <!--<div ng-click="showMangeFeedsModal()"><i class="configure icon"></i>Manage Feeds</div>-->
+                    <!--<div ng-click="showNewFeedModal()"><i class="plus icon"></i>Add New Feed</div>-->
+                    <!--<div ng-click="showSavedArticles()"><i class="archive icon"></i>{{savedArticles.length}} Saved Articles</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="line">
+                <span>Grid View</span>
+                <div class="ui slider checkbox">
+                    <input type="checkbox" name="public" ng-change="toggleView(toggle)" ng-model="toggle" ng-init="toggle=articleView">
+                    <label></label>
+                </div>
+                <span>List View</span>
+            </div>
+            <!--<a class="ui button right floated" href="/auth/logout">Logout</a>-->
+        </div>
+        <!--<div ng-if="!user" class="ui grid">-->
+            <!--<div class="sixteen wide column">-->
+                <!--<button class="ui button right floated" ng-click="showLoginModal()">Login/Register</button>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>

@@ -21,8 +21,7 @@
             };
 
             scope.parseDate = function(date) {
-                return date;
-                //return snug.parseDate(date);
+                return snug.parseDate(date);
             }
         }
 
@@ -34,12 +33,13 @@
             '<div class="actions">' +
             '<i ng-click="saveArticle(article)" class="save icon pointer"></i>' +
             '</div>' +
-            '<div class="icon">' +
+            '<div class="icon" ng-if="!view">' +
             '<img ng-if="article.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{article.icon_name}}.png">' +
             '</div>' +
-            '<h2 class="ui header">{{article.article_title}}</h2>' +
-            '<p ng-bind-html="parseDate(article.created_at)"></p>' +
-            '<p ng-bind-html="toTrustedHTML(article.article_description)"></p>' +
+            '<h2 class="ui header" ng-if="!view">{{article.article_title}}</h2>' +
+            '<p class="ui header" ng-if="view">{{article.article_title}}</p>' +
+            '<p ng-bind-html="parseDate(article.created_at)" ng-if="!view"></p>' +
+            '<p ng-bind-html="toTrustedHTML(article.article_description)" ng-if="!view"></p>' +
             '<p><a href="#" ng-click="readMore(article)">Read More</a></p>'
         };
     });

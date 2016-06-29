@@ -37,7 +37,7 @@ var app = {
         //setTimeout(function() {navigator.splashscreen.hide();}, 1000);
         app.receivedEvent('deviceready');
         angular.element(document).ready(function() {
-            angular.bootstrap(document);
+            angular.bootstrap(document, ['app']);
         });
     },
     // Update DOM on a Received Event
