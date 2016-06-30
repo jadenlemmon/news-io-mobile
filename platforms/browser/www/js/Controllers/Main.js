@@ -11,13 +11,13 @@
     var env = angular.module('env', []);
     env.constant('__env', __env);
 
-    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate']);
+    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds']);
 
 
     /**
      * Main Controller
      */
-    app.controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location) {
+    app.controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService) {
 
         $scope.articles = {};
         $scope.user = {};
@@ -25,6 +25,7 @@
         $scope.showSaved = false;                                   //if we are showing saved articles
         $scope.showSettings = false;
         $scope.articleView = false;
+        $scope.showManageFeeds = false;
 
         function getFeedsIds() {
             var feeds = $scope.user.feeds;
@@ -32,6 +33,24 @@
                 return i.id;
             });
         }
+
+        /**
+         * Update user active feeds via feed service
+         * @param feeds
+         */
+        function handleFeedUpdate(feeds) {
+            feeds = feeds.filter(function(i) {
+                if(i.active) return i;
+            });
+
+            snugfeedFeedsService.updateFeeds(feeds).then(function(data) {
+                getUserStatus();
+            });
+        }
+
+        $scope.$on('update user feeds', function(c, feeds) {
+            handleFeedUpdate(feeds);
+        });
 
         function getArticles(page) {
             var ids = $scope.articleFilter ? [$scope.articleFilter] : getFeedsIds();
@@ -76,6 +95,10 @@
             snugfeedUserService.logoutUser().then(function() {
                 $location.path('/');
             });
+        };
+
+        $scope.toggleManageFeeds = function() {
+            $scope.showManageFeeds = $scope.showManageFeeds ? false : true;
         }
 
     })

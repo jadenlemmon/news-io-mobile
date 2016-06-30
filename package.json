@@ -1,13 +1,13 @@
 {
-  "name": "phonegap-template-hello-world",
-  "version": "4.0.2",
+  "name": "snugfeed",
+  "version": "1.0.0",
   "description": "> A Hello World template built with PhoneGap",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phonegap/phonegap-app-hello-world.git"
+    "url": "git+https://github.com/phonegap/phonegap-app-hello-world.git"
   },
   "author": "PhoneGap Team",
-  "license": "Apache-2.0.0",
+  "license": "UNLICENSED",
   "keywords": [
     "ecosystem:phonegap",
     "ecosystem:cordova",
@@ -17,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/phonegap/phonegap-app-hello-world/issues"
   },
-  "homepage": "https://github.com/phonegap/phonegap-app-hello-world"
+  "homepage": "https://github.com/phonegap/phonegap-app-hello-world",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  },
+  "dependencies": {
+    "gulp-sass": "^2.3.2"
+  }
 }

@@ -1,0 +1,36 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+div[ng-view] {
+  height: 100%;
+}
+.pointer {
+  cursor: pointer;
+}
+.push {
+  margin-top: 80px;
+}
+
+//#sidebar {
+//  width: 45px;
+//  padding: 10px;
+//  background: #EEE;
+//  top: 65px;
+//}
+//#sidebar img {
+//  width: 25px;
+//}
+//#sidebar .item {
+//  margin: 10px 0;
+//}
+
+@import "variables";
+@import "feedsPage";
+@import "welcomePage";
+
+//components
+@import "manageFeedsComponent";

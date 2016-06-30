@@ -10,6 +10,20 @@
         </div>
     </div>
 
+    <div id="manage-feeds" ng-show="showManageFeeds">
+        <div class="ui container">
+            <i class="remove circle outline icon pointer" ng-click="toggleManageFeeds()"></i>
+
+            <div class="content">
+                <h3>Active Feeds</h3>
+                <managefeedscomponent></managefeedscomponent>
+                <!--<div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">-->
+                    <!--<a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
     <div id="top-bar">
         <div id="logo">
             <a href="/">
@@ -22,14 +36,14 @@
     </div>
 
     <div class="push">
-        <div class="ui thin sidebar visible" id="sidebar">
-            <div class="item" ng-class="{'active': !articleFilter && !showSaved}">
-                <a href="#feeds" ng-click="filterArticles(false)">All</a>
-            </div>
-            <div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">
-                <a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>
-            </div>
-        </div>
+        <!--<div class="ui thin sidebar visible" id="sidebar">-->
+            <!--<div class="item" ng-class="{'active': !articleFilter && !showSaved}">-->
+                <!--<a href="#feeds" ng-click="filterArticles(false)">All</a>-->
+            <!--</div>-->
+            <!--<div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">-->
+                <!--<a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div id="feed-stream">
             <div class="ui container">
@@ -62,6 +76,7 @@
                 </div>
                 <span>List View</span>
             </div>
+            <i class="block layout icon" ng-click="toggleManageFeeds()"></i>
             <!--<a class="ui button right floated" href="/auth/logout">Logout</a>-->
         </div>
         <!--<div ng-if="!user" class="ui grid">-->

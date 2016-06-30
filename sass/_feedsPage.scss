@@ -1,0 +1,140 @@
+#logo img {
+  width: 30px;
+}
+
+.ui.fluid.card {
+  border-radius: 0;
+  margin: 15px 0;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+#feed-stream {
+  .actions {
+    float: right;
+  }
+}
+
+/**
+Top Bar
+**/
+#logo {
+  float: left;
+  margin-left: 10px;
+  margin-top: 4px;
+}
+#top-bar {
+  position: fixed;
+  background: #ccc;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 25px 0 10px;
+
+  .icon.setting {
+    color: #333;
+    font-size: 1.5em;
+    float: right;
+    margin-top: 5px;
+    margin-left: 6px;
+    margin-right: 12px;
+  }
+
+  .avatar {
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #21BA45;
+    float: right;
+    text-align: center;
+    line-height: 2.1em;
+    text-transform: uppercase;
+  }
+}
+
+/**
+Settings Overlay
+**/
+#settings-overlay, #manage-feeds {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(51, 51, 51, 0.96);
+  z-index: 9999;
+  transition: all ease 0.5s;
+
+  .remove.circle {
+    color: #fff;
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    font-size: 2em;
+  }
+  .content {
+    margin-top: 70px;
+  }
+  &.ng-hide {
+    left: 500px;
+  }
+}
+#manage-feeds {
+  background: rgba(255, 255, 255, 0.96);
+
+  .item {
+    float: left;
+    margin: 15px;
+  }
+  .remove.circle {
+    color: #ccc;
+  }
+  &.ng-hide {
+    top: 800px;
+  }
+}
+
+/**
+Bottom Bar
+**/
+#utility-bar {
+  position: fixed;
+  bottom: 0;
+  height: 45px;
+  background: #333;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  color: #fff;
+
+  .block.layout.icon {
+    float: right;
+    font-size: 30px;
+    margin-top: 13px;
+  }
+  #user-manage-menu .popout {
+    display: none;
+    padding: 15px;
+    position: absolute;
+    top: -86px;
+    background: #333;
+    height: 100px;
+    left: 14px;
+    width: 200px;
+  }
+  #user-manage-menu:hover .popout {
+    display: block;
+  }
+  .line {
+    line-height: 3.1em;
+    float: left;
+    margin-left: 15px;
+  }
+  .ui.slider.checkbox {
+    padding: 5px 3px 4px 13px;
+  }
+}
