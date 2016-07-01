@@ -12,6 +12,9 @@ var snug = snug || {};
         },
         parseDate: function(date) {
             return moment(date).format('MMMM Do YYYY, h:mm a');
+        },
+        timePassed: function(date) {
+            return moment(date).fromNow();
         }
     }
 })();

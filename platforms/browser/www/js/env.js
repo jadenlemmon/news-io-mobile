@@ -3,7 +3,7 @@
 
     // API url
     //window.__env.apiUrl = 'http://news.jadenlemmon.com/api/v1/';
-    window.__env.apiUrl = 'http://news.io/api/v1/';
+    window.__env.apiUrl = 'http://news.jadenlemmon.com/api/v1/';
 
     // Base url
     window.__env.baseUrl = '/';

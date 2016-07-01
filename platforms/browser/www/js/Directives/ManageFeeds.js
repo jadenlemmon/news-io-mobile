@@ -33,7 +33,7 @@
             '<div class="overlay" ng-show="feed.active">' +
             '<i class="checkmark icon"></i>' +
             '</div>' +
-            '<img ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png">' +
+            '<img ng-src="{{feed.favicon_url}}">' +
             '</div>' +
             '</div>' +
             '</div>'
