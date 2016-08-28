@@ -59,7 +59,7 @@ Top Bar
 /**
 Settings Overlay
 **/
-#settings-overlay, #manage-feeds {
+#settings-overlay, #manage-feeds, #read-article {
   position: fixed;
   top: 0;
   left: 0;
@@ -83,7 +83,7 @@ Settings Overlay
     left: 500px;
   }
 }
-#manage-feeds {
+#manage-feeds, #read-article {
   background: rgba(255, 255, 255, 0.96);
 
   .item {

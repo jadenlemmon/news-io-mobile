@@ -12,5 +12,5 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-    gulp.watch('./scss/**/*.scss', ['sass']);
+    gulp.watch('./sass/**/*.scss', ['sass']);
 });

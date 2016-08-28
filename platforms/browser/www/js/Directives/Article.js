@@ -28,7 +28,8 @@
                 //});
             };
 
-            scope.readMore = function(article) {
+            scope.readMore = function($event, article) {
+                $event.preventDefault();
                 scope.$emit('read article', article);
             };
 
@@ -62,7 +63,7 @@
             '<p class="ui header" ng-if="view">{{article.article_title}}</p>' +
             '<p ng-bind-html="parseDate(article.created_at)" ng-if="!view"></p>' +
             '<p ng-bind-html="toTrustedHTML(article.article_description)" ng-if="!view"></p>' +
-            '<p><a href="#" ng-click="readMore(article)">Read More</a></p>'
+            '<p><a href="#" ng-click="readMore($event,article)">Read More</a></p>'
         };
     });
 })(angular);

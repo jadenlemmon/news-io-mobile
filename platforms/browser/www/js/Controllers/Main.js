@@ -11,13 +11,13 @@
     var env = angular.module('env', []);
     env.constant('__env', __env);
 
-    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds']);
+    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'modal']);
 
 
     /**
      * Main Controller
      */
-    app.controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService) {
+    app.controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService,$timeout) {
 
         $scope.articles = {};
         $scope.user = {};
@@ -26,6 +26,7 @@
         $scope.showSettings = false;
         $scope.articleView = false;
         $scope.showManageFeeds = false;
+        $scope.articleToRead = {};
 
         function getFeedsIds() {
             var feeds = $scope.user.feeds;
@@ -52,10 +53,16 @@
             handleFeedUpdate(feeds);
         });
 
+        $scope.$on('read article', function(c, article) {
+            $scope.articleToRead = article;
+            $timeout(function() {
+                $('#readArticleModal').modal('show');
+            },100);
+        });
+
         function getArticles(page) {
             var ids = $scope.articleFilter ? [$scope.articleFilter] : getFeedsIds();
             snugfeedArticlesService.getArticles(page, ids).then(function(resp) {
-                console.log(resp.data);
                 $scope.articles = resp.data;
                 console.log($scope.user.feeds);
             });
@@ -65,7 +72,6 @@
             snugfeedUserService.getUserStatus().then(function(resp) {
                 $scope.user = resp.data.user;
                 $scope.user.initials = snug.generateAvatarInitials($scope.user.name);
-                console.log($scope.user.feeds);
                 getArticles(false);
             });
         }
@@ -87,7 +93,6 @@
         };
 
         $scope.toggleView = function(toggle) {
-            console.log(toggle);
             $scope.articleView = toggle;
         };
 
@@ -99,7 +104,7 @@
 
         $scope.toggleManageFeeds = function() {
             $scope.showManageFeeds = $scope.showManageFeeds ? false : true;
-        }
+        };
 
     })
     .controller('welcomeController', function($scope,snugfeedUserService,$location) {
@@ -112,7 +117,6 @@
 
         $scope.submitLogin = function($event,login) {
             $event.preventDefault();
-            console.log(login);
             snugfeedUserService.loginUser(login).then(function(resp) {
                 snugfeedUserService.setApiToken(resp.data[0].api_token);
                 $location.path( "/feeds" );
