@@ -18,6 +18,8 @@ gulp.task('sass:watch', function () {
 gulp.task('bower:js', function () {
         return gulp.src([
             './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/hammerjs/hammer.min.js',
+            './bower_components/web-pull-to-refresh/lib/wptr.1.1.js',
             './bower_components/semantic/dist/semantic.min.js',
             './bower_components/underscore/underscore-min.js',
             './bower_components/angular/angular.min.js',
@@ -27,6 +29,13 @@ gulp.task('bower:js', function () {
             './bower_components/moment/min/moment.min.js'
         ])
         .pipe(gulp.dest('./www/js/vendors'));
+});
+
+gulp.task('bower:refresh', function () {
+    return gulp.src([
+            './bower_components/web-pull-to-refresh/lib/**/genericons/**'
+        ])
+        .pipe(gulp.dest('./www/css/vendors'));
 });
 
 gulp.task('bower:semantic', function () {

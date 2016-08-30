@@ -7,26 +7,15 @@
 }
 div[ng-view] {
   height: 100%;
+  //background: #fff;
 }
 .pointer {
   cursor: pointer;
 }
 .push {
-  margin-top: 80px;
+  margin-top: 65px;
+  position: relative;
 }
-
-//#sidebar {
-//  width: 45px;
-//  padding: 10px;
-//  background: #EEE;
-//  top: 65px;
-//}
-//#sidebar img {
-//  width: 25px;
-//}
-//#sidebar .item {
-//  margin: 10px 0;
-//}
 
 @import "variables";
 @import "readArticleComponent";
@@ -35,3 +24,6 @@ div[ng-view] {
 
 //components
 @import "manageFeedsComponent";
+
+//vendors
+@import "../bower_components/web-pull-to-refresh/base";

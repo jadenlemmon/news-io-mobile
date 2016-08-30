@@ -45,7 +45,7 @@
         <div class="avatar">{{user.initials}}</div>
     </div>
 
-    <div class="push">
+    <div class="push" id="push">
         <!--<div class="ui thin sidebar visible" id="sidebar">-->
             <!--<div class="item" ng-class="{'active': !articleFilter && !showSaved}">-->
                 <!--<a href="#feeds" ng-click="filterArticles(false)">All</a>-->
@@ -54,6 +54,22 @@
                 <!--<a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>-->
             <!--</div>-->
         <!--</div>-->
+
+        <!--<div id="content">-->
+            <!--&lt;!&ndash; Content that should be draggable for refreshing goes in here &ndash;&gt;-->
+        <!--</div>-->
+
+        <div id="ptr">
+            <!-- Pull down arrow indicator -->
+            <span class="genericon genericon-next"></span>
+
+            <!-- CSS-based loading indicator -->
+            <div class="loading">
+                <span id="l1"></span>
+                <span id="l2"></span>
+                <span id="l3"></span>
+            </div>
+        </div>
 
         <div id="feed-stream">
             <div class="ui container">
@@ -64,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+                <button class="fluid ui button" ng-click="getMoreArticles()">Load More</button>
             </div>
         </div>
     </div>

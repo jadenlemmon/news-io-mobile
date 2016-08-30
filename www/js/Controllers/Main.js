@@ -28,7 +28,7 @@
      */
     .controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService,$timeout) {
 
-        $scope.articles = {};
+        $scope.articles = [];
         $scope.user = {};
         $scope.articleFilter = false;                               //toggles filtering articles
         $scope.showSaved = false;                                   //if we are showing saved articles
@@ -37,6 +37,7 @@
         $scope.showManageFeeds = false;
         $scope.articleToRead = {};
         $scope.showReadArticle = false;
+        $scope.lastFeedID = 0;
 
         function getFeedsIds() {
             var feeds = $scope.user.feeds;
@@ -73,10 +74,25 @@
         });
 
         function getArticles(page) {
+            page = page ? $scope.lastFeedID : false;
+
             var ids = $scope.articleFilter ? [$scope.articleFilter] : getFeedsIds();
-            snugfeedArticlesService.getArticles(page, ids).then(function(resp) {
-                $scope.articles = resp.data;
-                console.log($scope.user.feeds);
+
+            return new Promise( function( resolve, reject ) {
+
+                snugfeedArticlesService.getArticles(page, ids).then(function (resp) {
+                    if (page && resp.data.length > 0) {
+                        $scope.articles = $scope.articles.concat(resp.data);
+                    }
+                    else {
+                        $scope.articles = resp.data;
+                    }
+                    $scope.lastFeedID = resp.data[resp.data.length - 1].id;
+                    resolve(resp.data);
+                },function(error) {
+                    reject(error);
+                });
+
             });
         }
 
@@ -122,6 +138,26 @@
             overlay();
             $scope.showReadArticle = $scope.showReadArticle ? false : true;
         };
+
+        $scope.getMoreArticles = function() {
+            getArticles(true);
+        };
+
+        var pullLoading = function() {
+            return new Promise( function( resolve, reject ) {
+                getArticles(false).then(function() {
+                    resolve();
+                }, function() {
+                    reject();
+                });
+            } );
+        };
+
+        Hammer.defaults.touchAction = 'auto';
+        WebPullToRefresh.init( {
+            loadingFunction: pullLoading,
+            contentEl: document.getElementById('feed-stream')
+        } );
 
     })
     .controller('welcomeController', function($scope,snugfeedUserService,$location) {

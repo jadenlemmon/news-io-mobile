@@ -61,6 +61,7 @@
             '</div>' +
             '<h2 class="ui header" ng-if="!view">{{article.article_title}}</h2>' +
             '<p class="ui header" ng-if="view">{{article.article_title}}</p>' +
+            '<p ng-if="article.article_img && !view"><img ng-src="{{article.article_img}}"></p>' +
             '<p ng-bind-html="parseDate(article.created_at)" ng-if="!view"></p>' +
             '<p ng-bind-html="toTrustedHTML(article.article_description)" ng-if="!view"></p>' +
             '<p><a href="#" ng-click="readMore($event,article)">Read More</a></p>'

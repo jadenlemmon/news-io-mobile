@@ -4,6 +4,11 @@ body {
   }
 }
 
+.ptr-loading #feed-stream {
+  -webkit-transform: translate3d( 0, 50px, 0 );
+  transform: translate3d( 0, 50px, 0 );
+}
+
 #logo img {
   width: 30px;
 }
@@ -17,7 +22,12 @@ body {
     height: auto;
   }
 }
+
 #feed-stream {
+  background: #fff;
+  padding-bottom: 100px;
+  padding-top: 5px;
+  overflow-y: scroll;
   .actions {
     float: right;
   }
@@ -31,6 +41,7 @@ Top Bar
   margin-left: 10px;
   margin-top: 4px;
 }
+
 #top-bar {
   position: fixed;
   background: $green;
@@ -89,6 +100,7 @@ Settings Overlay
     left: 500px;
   }
 }
+
 #manage-feeds, #read-article {
   background: rgba(255, 255, 255, 0.96);
   overflow-y: scroll;
