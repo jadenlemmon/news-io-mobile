@@ -13,11 +13,20 @@
 
     var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'modal']);
 
-
     /**
-     * Main Controller
+     * Global Controller
      */
-    app.controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService,$timeout) {
+    app.controller('globalController', function($scope) {
+        $scope.overlay = false;
+
+        $scope.$on('overlay', function() {
+            $scope.overlay = $scope.overlay ? false : true;
+        });
+    })
+    /**
+     * Feeds Controller
+     */
+    .controller('mainController', function($scope,$http,snugfeedArticlesService,snugfeedUserService,$location,snugfeedFeedsService,$timeout) {
 
         $scope.articles = {};
         $scope.user = {};
@@ -27,12 +36,17 @@
         $scope.articleView = false;
         $scope.showManageFeeds = false;
         $scope.articleToRead = {};
+        $scope.showReadArticle = false;
 
         function getFeedsIds() {
             var feeds = $scope.user.feeds;
             return feeds.map(function(i) {
                 return i.id;
             });
+        }
+
+        function overlay() {
+            $scope.$emit('overlay');
         }
 
         /**
@@ -55,9 +69,7 @@
 
         $scope.$on('read article', function(c, article) {
             $scope.articleToRead = article;
-            $timeout(function() {
-                $('#readArticleModal').modal('show');
-            },100);
+            $scope.toggleReadArticle();
         });
 
         function getArticles(page) {
@@ -104,6 +116,11 @@
 
         $scope.toggleManageFeeds = function() {
             $scope.showManageFeeds = $scope.showManageFeeds ? false : true;
+        };
+
+        $scope.toggleReadArticle = function() {
+            overlay();
+            $scope.showReadArticle = $scope.showReadArticle ? false : true;
         };
 
     })

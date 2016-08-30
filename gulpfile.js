@@ -14,3 +14,25 @@ gulp.task('sass', function () {
 gulp.task('sass:watch', function () {
     gulp.watch('./sass/**/*.scss', ['sass']);
 });
+
+gulp.task('bower:js', function () {
+        return gulp.src([
+            './bower_components/jquery/dist/jquery.min.js',
+            './bower_components/semantic/dist/semantic.min.js',
+            './bower_components/underscore/underscore-min.js',
+            './bower_components/angular/angular.min.js',
+            './bower_components/angular-animate/angular-animate.min.js',
+            './bower_components/angular-route/angular-route.min.js',
+            './bower_components/angular-sanitize/angular-sanitize.min.js',
+            './bower_components/moment/min/moment.min.js'
+        ])
+        .pipe(gulp.dest('./www/js/vendors'));
+});
+
+gulp.task('bower:semantic', function () {
+    return gulp.src([
+            './bower_components/semantic/dist/semantic.min.css',
+            './bower_components/semantic/dist/**/themes/**/default/**'
+        ])
+        .pipe(gulp.dest('./www/css/vendors/semantic'));
+});

@@ -1,3 +1,9 @@
+body {
+  &.overlay {
+    overflow: hidden;
+  }
+}
+
 #logo img {
   width: 30px;
 }
@@ -27,7 +33,7 @@ Top Bar
 }
 #top-bar {
   position: fixed;
-  background: #ccc;
+  background: $green;
   top: 0;
   left: 0;
   z-index: 999;
@@ -35,7 +41,7 @@ Top Bar
   padding: 25px 0 10px;
 
   .icon.setting {
-    color: #333;
+    color: #fff;
     font-size: 1.5em;
     float: right;
     margin-top: 5px;
@@ -44,11 +50,11 @@ Top Bar
   }
 
   .avatar {
-    color: #fff;
+    color: $green;
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    background: #21BA45;
+    background: #fff;
     float: right;
     text-align: center;
     line-height: 2.1em;
@@ -85,6 +91,8 @@ Settings Overlay
 }
 #manage-feeds, #read-article {
   background: rgba(255, 255, 255, 0.96);
+  overflow-y: scroll;
+  padding-bottom: 75px;
 
   .item {
     float: left;
@@ -92,9 +100,6 @@ Settings Overlay
   }
   .remove.circle {
     color: #ccc;
-  }
-  &.ng-hide {
-    top: 800px;
   }
 }
 

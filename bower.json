@@ -1,0 +1,25 @@
+{
+  "name": "snugfeed",
+  "description": "snugfeed keeps your feeds close",
+  "main": "index.js",
+  "authors": [
+    "Jaden Lemmon"
+  ],
+  "license": "UNLICENSED",
+  "keywords": [
+    "ecosystem:phonegap",
+    "ecosystem:cordova",
+    "cordova:template",
+    "phonegap:template"
+  ],
+  "homepage": "https://github.com/jlemm45/newsIOApp",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

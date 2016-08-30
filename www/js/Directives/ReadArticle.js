@@ -11,6 +11,7 @@
         controller: readArticleController,
         bindings: {article: '='},
         template: '' +
+        '<h2>{{$ctrl.article.article_title}}</h2>' +
         '<p ng-if="$ctrl.article.article_img"><img ng-src="{{$ctrl.article.article_img}}"></p>' +
         '<p ng-bind-html="toTrustedHTML($ctrl.article.article_description)"></p>'
     });
