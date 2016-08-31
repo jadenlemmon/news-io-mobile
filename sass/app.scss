@@ -24,6 +24,7 @@ div[ng-view] {
 
 //components
 @import "manageFeedsComponent";
+@import "feedDropdownComponent";
 
 //vendors
 @import "../bower_components/web-pull-to-refresh/base";

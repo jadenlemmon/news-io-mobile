@@ -86,31 +86,72 @@
     </div>
 
     <div id="utility-bar">
-        <div class="">
-            <!--<div id="user-manage-menu">-->
-                <!--<div class="avatar">{{user.initials}}</div><span class="name">{{user.name}}</span>-->
-                <!--<div class="popout">-->
-                    <!--<div ng-click="showMangeFeedsModal()"><i class="configure icon"></i>Manage Feeds</div>-->
-                    <!--<div ng-click="showNewFeedModal()"><i class="plus icon"></i>Add New Feed</div>-->
-                    <!--<div ng-click="showSavedArticles()"><i class="archive icon"></i>{{savedArticles.length}} Saved Articles</div>-->
-                <!--</div>-->
+        <feeddropdowncomponent values="user.feeds"></feeddropdowncomponent>
+        <!--<div class="">-->
+            <!--&lt;!&ndash;<div id="user-manage-menu">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="avatar">{{user.initials}}</div><span class="name">{{user.name}}</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="popout">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-click="showMangeFeedsModal()"><i class="configure icon"></i>Manage Feeds</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-click="showNewFeedModal()"><i class="plus icon"></i>Add New Feed</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div ng-click="showSavedArticles()"><i class="archive icon"></i>{{savedArticles.length}} Saved Articles</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<div class="line">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>Grid View</span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="ui slider checkbox">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type="checkbox" name="public" ng-change="toggleView(toggle)" ng-model="toggle" ng-init="toggle=articleView">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<label></label>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span>List View</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--<div class="line">-->
+                <!--&lt;!&ndash;<div class="ui floating labeled icon dropdown button">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="add user icon"></i>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<span class="text">Add User</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="menu">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="header">&ndash;&gt;-->
+                            <!--&lt;!&ndash;People You Might Know&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/jenny.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Jenny Hess&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/elliot.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Elliot Fu&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/stevie.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Stevie Feliciano&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="header">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Your Friends' Friends&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/christian.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Christian&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/matt.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Matt&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<img class="ui avatar image" src="/images/avatar/small/justen.jpg">&ndash;&gt;-->
+                            <!--&lt;!&ndash;Justen Kitsune&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
             <!--</div>-->
-            <div class="line">
-                <span>Grid View</span>
-                <div class="ui slider checkbox">
-                    <input type="checkbox" name="public" ng-change="toggleView(toggle)" ng-model="toggle" ng-init="toggle=articleView">
-                    <label></label>
-                </div>
-                <span>List View</span>
-            </div>
-            <i class="block layout icon" ng-click="toggleManageFeeds()"></i>
-            <!--<a class="ui button right floated" href="/auth/logout">Logout</a>-->
-        </div>
-        <!--<div ng-if="!user" class="ui grid">-->
-            <!--<div class="sixteen wide column">-->
-                <!--<button class="ui button right floated" ng-click="showLoginModal()">Login/Register</button>-->
-            <!--</div>-->
+            <!--<i class="block layout icon" ng-click="toggleManageFeeds()"></i>-->
+
+            <!--&lt;!&ndash;<a class="ui button right floated" href="/auth/logout">Logout</a>&ndash;&gt;-->
         <!--</div>-->
+        <!--&lt;!&ndash;<div ng-if="!user" class="ui grid">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="sixteen wide column">&ndash;&gt;-->
+                <!--&lt;!&ndash;<button class="ui button right floated" ng-click="showLoginModal()">Login/Register</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
     </div>
 
     <!--<modal header="{{articleToRead.article_title}}" modal-id="readArticleModal">-->

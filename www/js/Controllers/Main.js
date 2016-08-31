@@ -11,7 +11,7 @@
     var env = angular.module('env', []);
     env.constant('__env', __env);
 
-    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'modal']);
+    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'modal', 'feeddropdowncomponent']);
 
     /**
      * Global Controller
@@ -50,6 +50,13 @@
             $scope.$emit('overlay');
         }
 
+        function filterArticles(id) {
+            $scope.articles = [];
+            $scope.articleFilter = id !== 0 ? [id] : false;
+
+            getArticles(false);
+        }
+
         /**
          * Update user active feeds via feed service
          * @param feeds
@@ -66,6 +73,10 @@
 
         $scope.$on('update user feeds', function(c, feeds) {
             handleFeedUpdate(feeds);
+        });
+
+        $scope.$on('feed selected', function(c, value) {
+            filterArticles(parseInt(value));
         });
 
         $scope.$on('read article', function(c, article) {
@@ -104,17 +115,6 @@
             });
         }
         getUserStatus();
-
-
-        /**
-         * Filters articles
-         * @param id
-         */
-        $scope.filterArticles = function(id) {
-            $scope.articleFilter = id;
-            getArticles(false);
-            $scope.showSaved = false;
-        };
 
         $scope.toggleSettings = function() {
             $scope.showSettings = $scope.showSettings ? false : true;
@@ -158,6 +158,19 @@
             loadingFunction: pullLoading,
             contentEl: document.getElementById('feed-stream')
         } );
+
+        var hammertime = new Hammer(document.getElementById('read-article'));
+        hammertime.get('pan').set({ direction: Hammer.DIRECTION_RIGHT });
+
+        hammertime.on( 'panright', _panRight );
+
+        function _panRight(e) {
+            console.log(e);
+            if(e.distance > 300) {
+                $scope.showReadArticle = false;
+                $scope.$apply();
+            }
+        }
 
     })
     .controller('welcomeController', function($scope,snugfeedUserService,$location) {

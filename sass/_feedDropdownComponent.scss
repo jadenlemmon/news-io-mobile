@@ -1,0 +1,13 @@
+#utility-bar {
+  .ui.fluid.dropdown {
+    padding: 11px;
+    .menu {
+      width: 100%;
+      border-radius: 0;
+    }
+    .dropdown.icon {
+      margin: -1px 6px;
+      font-size: 25px;
+    }
+  }
+}
