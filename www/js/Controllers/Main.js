@@ -191,6 +191,44 @@
             });
         }
     })
+    .controller('addFeedsController', function($scope,$location,snugfeedUserService,snugfeedFeedsService) {
+
+        var vm = this;
+        vm.feeds = [];
+        vm.loading = false;
+
+        if(snugfeedUserService.getApiToken() == '') {
+            $location.path( "/" );
+        }
+
+        function searchTerm(term) {
+            vm.loading = true;
+            snugfeedFeedsService.searchForFeed(term).then(function(resp) {
+                vm.feeds = resp.data;
+                vm.loading = false;
+            });
+        }
+
+        vm.search = function(term) {
+            if(term.length > 3) searchTerm(term);
+        };
+
+        vm.add = function($index, url) {
+            if(vm.feeds[$index].added) return;
+
+            vm.feeds[$index].loading = true;
+
+            snugfeedFeedsService.addFeed({feed_url: url}).then(function(resp) {
+                vm.feeds[$index].loading = false;
+                if(resp.data.status == 'success') {
+                    vm.feeds[$index].added = true;
+                    vm.feeds[$index].btnText = ' ';
+                }
+
+            });
+        }
+
+    })
     .config(function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/', {
@@ -200,6 +238,11 @@
             .when('/feeds', {
                 templateUrl: 'views/feeds.html',
                 controller: 'mainController'
+            })
+            .when('/add-feeds', {
+                templateUrl: 'views/add-feeds.html',
+                controller: 'addFeedsController',
+                controllerAs: 'vm'
             });
     });
 })(angular);

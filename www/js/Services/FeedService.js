@@ -10,6 +10,7 @@
 
             var addFeed = function (data) {
                 data.api_token = snugfeedUserService.getApiToken();
+                console.log(data);
                 return $http.post(__env.apiUrl+"feed", data);
             };
 
@@ -18,10 +19,15 @@
                 return $http.put(__env.apiUrl+"feeds?api_token="+snugfeedUserService.getApiToken(), feeds);
             };
 
+            var searchForFeed = function(term) {
+                return $http.get(__env.apiUrl+"feed?term="+term+'&api_token='+snugfeedUserService.getApiToken());
+            };
+
             return {
                 getFeeds: getFeeds,
                 updateFeeds: updateFeeds,
-                addFeed: addFeed
+                addFeed: addFeed,
+                searchForFeed: searchForFeed
             };
 
         });

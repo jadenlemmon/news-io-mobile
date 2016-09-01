@@ -1,0 +1,26 @@
+<div id="add-feeds">
+    <div class="ui container">
+        <a class="fluid ui button done" href="#feeds">Done</a>
+
+        <h3>Search or add from below</h3>
+        <div class="ui fluid icon input" ng-class="{'loading': vm.loading}">
+            <input type="text" placeholder="Search..." ng-model="searchText" ng-change="vm.search(searchText)">
+            <i class="search icon"></i>
+        </div>
+
+        <div class="ui middle aligned divided list">
+            <div class="item" ng-repeat="feed in vm.feeds">
+                <div class="right floated content">
+                    <div class="ui button" ng-click="vm.add($index, feed.feed_url)"
+                         ng-class="{'loading': feed.loading, 'positive': feed.added}">
+                        {{feed.btnText || 'Add'}}
+                        <i class="checkmark icon" ng-if="feed.added"></i></div>
+                </div>
+                <img class="ui avatar image" ng-src="{{feed.favicon_url}}">
+                <div class="content">
+                    {{feed.source | limitTo:40}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
