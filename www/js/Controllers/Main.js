@@ -38,6 +38,7 @@
         $scope.articleToRead = {};
         $scope.showReadArticle = false;
         $scope.lastFeedID = 0;
+        $scope.loading = true;
 
         function getFeedsIds() {
             var feeds = $scope.user.feeds;
@@ -85,6 +86,7 @@
         });
 
         function getArticles(page) {
+            //$scope.loading = true;
             page = page ? $scope.lastFeedID : false;
 
             var ids = $scope.articleFilter ? [$scope.articleFilter] : getFeedsIds();
@@ -100,6 +102,7 @@
                     }
                     $scope.lastFeedID = resp.data[resp.data.length - 1].id;
                     resolve(resp.data);
+                    $scope.loading = false;
                 },function(error) {
                     reject(error);
                 });
@@ -209,16 +212,24 @@
             });
         }
 
+        function init() {
+            snugfeedFeedsService.getFeeds().then(function(resp) {
+                vm.feeds = resp.data.data;
+            });
+        }
+        init();
+
         vm.search = function(term) {
             if(term.length > 3) searchTerm(term);
         };
 
-        vm.add = function($index, url) {
+        vm.add = function($index, feedID) {
+
             if(vm.feeds[$index].added) return;
 
             vm.feeds[$index].loading = true;
 
-            snugfeedFeedsService.addFeed({feed_url: url}).then(function(resp) {
+            snugfeedFeedsService.addFeed({feed_id: feedID}).then(function(resp) {
                 vm.feeds[$index].loading = false;
                 if(resp.data.status == 'success') {
                     vm.feeds[$index].added = true;

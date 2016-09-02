@@ -2,6 +2,10 @@
 
     <!--Overlays-->
 
+    <div class="ui active inverted dimmer" ng-show="loading">
+        <div class="ui text loader">Loading</div>
+    </div>
+
     <div id="settings-overlay" ng-show="showSettings">
         <div class="ui container">
             <i class="remove circle outline icon pointer" ng-click="toggleSettings()"></i>

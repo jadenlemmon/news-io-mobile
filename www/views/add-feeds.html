@@ -11,7 +11,7 @@
         <div class="ui middle aligned divided list">
             <div class="item" ng-repeat="feed in vm.feeds">
                 <div class="right floated content">
-                    <div class="ui button" ng-click="vm.add($index, feed.feed_url)"
+                    <div class="ui button" ng-click="vm.add($index, feed.id)"
                          ng-class="{'loading': feed.loading, 'positive': feed.added}">
                         {{feed.btnText || 'Add'}}
                         <i class="checkmark icon" ng-if="feed.added"></i></div>

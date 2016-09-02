@@ -12,9 +12,13 @@ div[ng-view] {
 .pointer {
   cursor: pointer;
 }
+.app {
+  //height: 100%;
+}
 .push {
   margin-top: 65px;
   position: relative;
+  //height: 100%;
 }
 
 @import "variables";

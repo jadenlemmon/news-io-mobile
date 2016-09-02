@@ -10,12 +10,10 @@
 
             var addFeed = function (data) {
                 data.api_token = snugfeedUserService.getApiToken();
-                console.log(data);
                 return $http.post(__env.apiUrl+"feed", data);
             };
 
             var updateFeeds = function (feeds) {
-                //feeds.api_token = snugfeedUserService.getApiToken();
                 return $http.put(__env.apiUrl+"feeds?api_token="+snugfeedUserService.getApiToken(), feeds);
             };
 
