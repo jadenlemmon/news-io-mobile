@@ -59,8 +59,8 @@
             '<div class="icon" ng-if="!view">' +
             '<img ng-src="{{favicon}}">' +
             '</div>' +
-            '<h2 class="ui header" ng-if="!view">{{article.article_title}}</h2>' +
-            '<p class="ui header" ng-if="view">{{article.article_title}}</p>' +
+            '<h2 class="ui header" ng-if="!view" ng-click="readMore($event,article)">{{article.article_title}}</h2>' +
+            '<p class="ui header" ng-if="view" ng-click="readMore($event,article)">{{article.article_title}}</p>' +
             '<p ng-if="article.article_img && !view"><img ng-src="{{article.article_img}}"></p>' +
             '<p ng-bind-html="parseDate(article.created_at)" ng-if="!view"></p>' +
             '<p ng-bind-html="toTrustedHTML(article.article_description)" ng-if="!view"></p>' +

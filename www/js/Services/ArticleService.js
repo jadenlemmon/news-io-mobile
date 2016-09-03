@@ -23,7 +23,7 @@
             };
 
             var getSavedArticles = function() {
-                return $http.get("/api/article");
+                return $http.get(__env.apiUrl+"article?api_token="+snugfeedUserService.getApiToken());
             };
 
             return {

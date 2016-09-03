@@ -16,12 +16,27 @@
     /**
      * Global Controller
      */
-    app.controller('globalController', function($scope) {
+    app.controller('globalController', function($scope,$location,snugfeedUserService) {
         $scope.overlay = false;
 
         $scope.$on('overlay', function() {
             $scope.overlay = $scope.overlay ? false : true;
         });
+
+        $scope.toggleSettings = function() {
+            $('.ui.sidebar').sidebar('toggle');
+        };
+
+        $scope.showAddFeeds = function() {
+            $location.path('add-feeds');
+            $scope.toggleSettings();
+        };
+
+        $scope.logout = function() {
+            snugfeedUserService.logoutUser().then(function() {
+                $location.path('/');
+            });
+        };
     })
     /**
      * Feeds Controller
@@ -52,10 +67,25 @@
         }
 
         function filterArticles(id) {
+            console.log(id);
             $scope.articles = [];
             $scope.articleFilter = id !== 0 ? [id] : false;
 
-            getArticles(false);
+            if(id == 'saved') {
+                getSavedArticles();
+            }
+            else {
+                getArticles(false);
+            }
+        }
+
+        /**
+         * Get's all articles saved by the user
+         */
+        function getSavedArticles() {
+            snugfeedArticlesService.getSavedArticles().then(function(resp) {
+                $scope.articles = resp.data;
+            });
         }
 
         /**
@@ -76,8 +106,8 @@
             handleFeedUpdate(feeds);
         });
 
-        $scope.$on('feed selected', function(c, value) {
-            filterArticles(parseInt(value));
+        $scope.$on('feed selected', function(e, value) {
+            filterArticles(value);
         });
 
         $scope.$on('read article', function(c, article) {
@@ -89,7 +119,7 @@
             //$scope.loading = true;
             page = page ? $scope.lastFeedID : false;
 
-            var ids = $scope.articleFilter ? [$scope.articleFilter] : getFeedsIds();
+            var ids = parseInt($scope.articleFilter) ? [$scope.articleFilter] : getFeedsIds();
 
             return new Promise( function( resolve, reject ) {
 
@@ -119,22 +149,8 @@
         }
         getUserStatus();
 
-        $scope.toggleSettings = function() {
-            $scope.showSettings = $scope.showSettings ? false : true;
-        };
-
         $scope.toggleView = function(toggle) {
             $scope.articleView = toggle;
-        };
-
-        $scope.logout = function() {
-            snugfeedUserService.logoutUser().then(function() {
-                $location.path('/');
-            });
-        };
-
-        $scope.toggleManageFeeds = function() {
-            $scope.showManageFeeds = $scope.showManageFeeds ? false : true;
         };
 
         $scope.toggleReadArticle = function() {

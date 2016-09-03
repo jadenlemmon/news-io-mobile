@@ -36,7 +36,8 @@
                 '<i class="dropdown icon"></i>' +
                 '<div class="default text">All Feeds</div>' +
                 '<div class="menu">' +
-                    '<div class="item" data-value="0">All Feeds</div>' +
+                    '<div class="item" data-value="all">All Feeds</div>' +
+                    '<div class="item" data-value="saved">Saved Feeds</div>' +
                     '<div class="item" data-value="{{value.id}}" ng-repeat="value in values">' +
                         '<img ng-src="{{value.favicon_url}}"> {{value.source}}' +
                     '</div>' +

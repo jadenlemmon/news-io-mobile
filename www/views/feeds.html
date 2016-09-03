@@ -29,8 +29,11 @@
     </div>
 
     <div id="read-article" ng-show="showReadArticle">
+        <div class="back-bar">
+            <i class="angle left icon" ng-click="toggleReadArticle()"></i>
+        </div>
         <div class="ui container">
-            <i class="remove circle outline icon pointer" ng-click="toggleReadArticle()"></i>
+            <!--<i class="remove circle outline icon pointer"></i>-->
             <div class="content">
                 <readarticlecomponent article="articleToRead"></readarticlecomponent>
             </div>
@@ -46,18 +49,18 @@
                      class="img-responsive">
             </a>
         </div>
-        <i class="setting icon pointer" ng-click="toggleSettings()"></i>
-        <div class="avatar">{{user.initials}}</div>
+        <i class="bars icon pointer" aria-hidden="true" ng-click="toggleSettings()"></i>
+        <!--<div class="avatar">{{user.initials}}</div>-->
     </div>
 
     <div class="push" id="push">
         <!--<div class="ui thin sidebar visible" id="sidebar">-->
-            <!--<div class="item" ng-class="{'active': !articleFilter && !showSaved}">-->
-                <!--<a href="#feeds" ng-click="filterArticles(false)">All</a>-->
-            <!--</div>-->
-            <!--<div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">-->
-                <!--<a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>-->
-            <!--</div>-->
+        <!--<div class="item" ng-class="{'active': !articleFilter && !showSaved}">-->
+        <!--<a href="#feeds" ng-click="filterArticles(false)">All</a>-->
+        <!--</div>-->
+        <!--<div class="item" ng-class="{'active': articleFilter == feed.id && !showSaved}" ng-repeat="feed in user.feeds">-->
+        <!--<a href="#feeds" ng-click="filterArticles(feed.id)"><img ng-if="feed.icon_name" ng-src="https://s3-us-west-2.amazonaws.com/news-io/icons/{{feed.icon_name}}.png"></a>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div id="ptr">
