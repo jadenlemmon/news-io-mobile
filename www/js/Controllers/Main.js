@@ -63,9 +63,11 @@
 
             if(id == 'saved') {
                 getSavedArticles();
+                $scope.showSaved = true;
             }
             else {
-                getArticles(false);
+                getArticles(false, true);
+                $scope.showSaved = false;
             }
         }
 
@@ -105,7 +107,16 @@
             $scope.toggleReadArticle();
         });
 
-        function getArticles(page) {
+        $scope.$on('article deleted', function(c,article) {
+            var arr = $scope.articles;
+            arr = _.filter(arr, function(item) {
+                return item.id !== article.id;
+            });
+            $scope.articles = arr;
+        });
+
+        function getArticles(page, loading) {
+            $scope.loading = loading;
             page = page ? $scope.lastFeedID : false;
 
             var ids = parseInt($scope.articleFilter) ? [$scope.articleFilter] : getFeedsIds();
@@ -146,12 +157,12 @@
         };
 
         $scope.getMoreArticles = function() {
-            getArticles(true);
+            getArticles(true, true);
         };
 
         var pullLoading = function() {
             return new Promise( function( resolve, reject ) {
-                getArticles(false).then(function() {
+                getArticles(false, false).then(function() {
                     resolve();
                 }, function() {
                     reject();
@@ -189,7 +200,7 @@
                         if(ev.distance > (threshhold)) {
                             options.ele.style.transform = options.ele.style.transform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
                             options.ele.style.transform = options.ele.style.webkitTransform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
-                            $scope.showReadArticle = $scope.showReadArticle ? false : true;
+                            $scope.toggleReadArticle();
                             $scope.$apply();
                             $timeout(function() {
                                 options.ele.style.transform = options.ele.style.transform = '';

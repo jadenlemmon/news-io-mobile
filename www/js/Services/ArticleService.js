@@ -11,11 +11,15 @@
             };
 
             var saveArticle = function(id) {
-                return $http.put("/api/article/"+id);
+                return $http.put(__env.apiUrl+"article/"+id+'?api_token='+snugfeedUserService.getApiToken());
             };
 
             var getArticle = function(id) {
                 return $http.get("/api/article/"+id);
+            };
+
+            var deleteArticle = function(id) {
+                return $http.delete(__env.apiUrl+"article/"+id+'?api_token='+snugfeedUserService.getApiToken());
             };
 
             var getArticlesByIds = function(ids) {
@@ -23,7 +27,7 @@
             };
 
             var getSavedArticles = function() {
-                return $http.get(__env.apiUrl+"article?api_token="+snugfeedUserService.getApiToken());
+                return $http.get(__env.apiUrl+"articles?saved=true&api_token="+snugfeedUserService.getApiToken());
             };
 
             return {
@@ -31,6 +35,7 @@
                 saveArticle: saveArticle,
                 getSavedArticles: getSavedArticles,
                 getArticle: getArticle,
+                deleteArticle: deleteArticle,
                 getArticlesByIds: getArticlesByIds
             };
 

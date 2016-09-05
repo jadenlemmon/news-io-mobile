@@ -5,6 +5,8 @@ body {
     background: #eee;
     padding: 25px 15px 10px;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
 
     i {
@@ -23,6 +25,11 @@ body {
     height: 100%;
     overflow-y: scroll;
   }
+}
+
+#ptr {
+  top: 65px !important;
+  z-index: -1 !important;
 }
 
 .ptr-loading #feed-stream {
@@ -55,12 +62,17 @@ body {
   padding-top: 5px;
   overflow-y: scroll;
   position: fixed;
+  top: 65px;
   height: 100%;
   width: 100%;
   -webkit-overflow-scrolling: touch;
 
   .actions {
     float: right;
+  }
+
+  #articles-contain {
+    padding-bottom: 50px;
   }
 }
 

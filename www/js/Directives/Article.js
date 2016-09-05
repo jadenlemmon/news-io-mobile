@@ -1,9 +1,12 @@
 'use strict';
 
 (function(angular) {
-    angular.module('article', ['ngSanitize']).directive('article', function($sce,$timeout) {
+    angular.module('article', ['ngSanitize']).directive('article', function($sce,$timeout,snugfeedArticlesService) {
 
         function link(scope, element, attrs) {
+
+            scope.saved = false;
+            scope.saving = false;
 
             function charLimit(content) {
                 if(content) {
@@ -21,11 +24,21 @@
             };
 
             scope.saveArticle = function(article) {
-                //snugfeedArticlesService.saveArticle(article.id).then(function() {
-                //    $timeout(function() { //weird but had to do this to run on next digest
-                //        scope.$emit('article saved', article);
-                //    })
-                //});
+                scope.saving = true;
+                snugfeedArticlesService.saveArticle(article.id).then(function() {
+                    scope.saved = true;
+                    scope.saving = false;
+                });
+            };
+
+            scope.deleteArticle = function(article) {
+                scope.saving = true;
+                snugfeedArticlesService.deleteArticle(article.id).then(function() {
+                    scope.saving = false;
+                    $timeout(function() { //weird but had to do this to run on next digest
+                        scope.$emit('article deleted', article);
+                    })
+                });
             };
 
             scope.readMore = function($event, article) {
@@ -51,10 +64,13 @@
         return {
             link: link,
             restrict: 'E',
-            scope: {article: '=article', view: '=view'},
+            scope: {article: '=article', view: '=view', showSaved: '=saved'},
             template: '' +
             '<div class="actions">' +
-            '<i ng-click="saveArticle(article)" class="save icon pointer"></i>' +
+            '<div class="ui tiny active inline loader" ng-show="saving"></div>' +
+            '<i class="checkmark icon" ng-show="saved"></i>' +
+            '<i ng-click="saveArticle(article)" ng-show="!saved && !saving && !showSaved" class="save icon pointer"></i>' +
+            '<i ng-click="deleteArticle(article)" ng-show="showSaved && !saving" class="trash icon pointer"></i>' +
             '</div>' +
             '<div class="icon" ng-if="!view">' +
             '<img ng-src="{{favicon}}">' +

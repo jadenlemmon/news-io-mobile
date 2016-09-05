@@ -2,15 +2,19 @@
   display: none !important;
 }
 
-html, body {
+html, body, html.ios, html.ios body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100% !important;
   overflow: hidden;
 }
 
 body {
   position: relative;
+
+  .pusher {
+    height: 100%;
+  }
 }
 
 * {
@@ -18,38 +22,10 @@ body {
 }
 div[ng-view] {
   height: 100%;
-  //background: #fff;
 }
 .pointer {
   cursor: pointer;
 }
-.push {
-  margin-top: 65px;
-  position: relative;
-}
-//#overlay {
-//  position: fixed;
-//  top: 0;
-//  left: 0;
-//  width: 100%;
-//  height: 100%;
-//
-//  &.hidden {
-//    left: -100%;
-//  }
-//}
-
-//.overlay {
-//  #overlay {
-//    position: fixed;
-//    top: 0;
-//    left: 0;
-//    width: 100%;
-//    height: 100%;
-//  }
-//}
-
-//html.ios, html.ios body { height: 100% !important; }
 
 @import "variables";
 @import "readArticleComponent";
