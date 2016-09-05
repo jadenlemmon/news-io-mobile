@@ -23,8 +23,7 @@
     <title>SnugFeed</title>
 </head>
 
-<body ng-controller="globalController" ng-class="{'overlay': overlay}">
-
+<body ng-controller="globalController">
     <div class="ui right vertical overlay sidebar labeled icon menu" id="sidebar">
         <a class="item" href="#/add-feeds" ng-click="showAddFeeds()">
             <i class="plus square outline icon"></i>
@@ -35,8 +34,9 @@
             Logout
         </a>
     </div>
-
-    <div id="view" ng-view></div>
+    <div class="pusher">
+        <div id="view" ng-view></div>
+    </div>
 
     <script src="js/env.js"></script>
     <script src="js/vendors/jquery.min.js"></script>
@@ -49,6 +49,7 @@
     <script src="js/vendors/angular-sanitize.min.js"></script>
     <script src="js/vendors/angular-animate.min.js"></script>
     <script src="js/vendors/moment.min.js"></script>
+    <script src="js/Directives/Overlay.js"></script>
     <script src="js/Directives/Article.js"></script>
     <script src="js/Directives/FeedDropdown.js"></script>
     <script src="js/Directives/Modal.js"></script>

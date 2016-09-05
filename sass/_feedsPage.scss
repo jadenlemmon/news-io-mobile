@@ -1,17 +1,22 @@
 body {
+  //-webkit-overflow-scrolling: touch;
+
+  .back-bar {
+    background: #eee;
+    padding: 25px 15px 10px;
+    position: fixed;
+    width: 100%;
+
+    i {
+      font-size: 25px;
+      color: #7b7b7b;
+      font-weight: bold;
+    }
+  }
+
   &.overlay {
     overflow: hidden;
-
-    .back-bar {
-      background: #eee;
-      padding: 25px 15px 10px;
-
-      i {
-        font-size: 25px;
-        color: #7b7b7b;
-        font-weight: bold;
-      }
-    }
+    position: fixed;
   }
   &.pushable>.pusher {
     background: transparent;
@@ -27,13 +32,6 @@ body {
 
 #logo img {
   width: 30px;
-}
-
-#sidebar.ui.sidebar {
-  box-shadow: none;
-  border: 1px solid rgb(242, 242, 242);
-  background: rgb(242, 242, 242);
-  z-index: 3;
 }
 
 .ui.fluid.card {
@@ -56,6 +54,10 @@ body {
   padding-bottom: 100px;
   padding-top: 5px;
   overflow-y: scroll;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 
   .actions {
     float: right;
@@ -113,10 +115,10 @@ Settings Overlay
   height: 100%;
   background: rgba(51, 51, 51, 1);
   z-index: 9999;
-  transition: all ease 0.2s;
 
   .content {
     margin-top: 10px;
+    padding-top: 60px;
   }
   &.ng-hide {
     left: 500px;
@@ -129,6 +131,16 @@ Settings Overlay
   padding-bottom: 75px;
   opacity: 1;
   left: 0;
+  -webkit-overflow-scrolling: touch;
+
+  &.animate {
+    -webkit-transition: all ease 0.4s;
+    transition: all ease 0.4s;
+  }
+
+  &.swiping {
+    overflow: hidden;
+  }
 
   &.ng-hide {
     left: 0;
@@ -136,7 +148,6 @@ Settings Overlay
   }
 
   .item {
-    //float: left;
     margin: 15px 0;
   }
   .remove.circle {

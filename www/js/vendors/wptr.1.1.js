@@ -78,7 +78,8 @@ var WebPullToRefresh = (function () {
 	 * @param {object} e - Event object
 	 */
 	var _panStart = function(e) {
-		pan.startingPositionY = document.body.scrollTop;
+		//pan.startingPositionY = document.body.scrollTop;
+		pan.startingPositionY = options.contentEl.scrollTop;
 
 		if ( pan.startingPositionY === 0 ) {
 			pan.enabled = true;

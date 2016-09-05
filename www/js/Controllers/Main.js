@@ -11,17 +11,12 @@
     var env = angular.module('env', []);
     env.constant('__env', __env);
 
-    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'modal', 'feeddropdowncomponent']);
+    var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'feeddropdowncomponent']);
 
     /**
      * Global Controller
      */
-    app.controller('globalController', function($scope,$location,snugfeedUserService) {
-        $scope.overlay = false;
-
-        $scope.$on('overlay', function() {
-            $scope.overlay = $scope.overlay ? false : true;
-        });
+    app.controller('globalController', function($scope,$location,snugfeedUserService,$timeout) {
 
         $scope.toggleSettings = function() {
             $('.ui.sidebar').sidebar('toggle');
@@ -62,12 +57,7 @@
             });
         }
 
-        function overlay() {
-            $scope.$emit('overlay');
-        }
-
         function filterArticles(id) {
-            console.log(id);
             $scope.articles = [];
             $scope.articleFilter = id !== 0 ? [id] : false;
 
@@ -116,7 +106,6 @@
         });
 
         function getArticles(page) {
-            //$scope.loading = true;
             page = page ? $scope.lastFeedID : false;
 
             var ids = parseInt($scope.articleFilter) ? [$scope.articleFilter] : getFeedsIds();
@@ -147,15 +136,13 @@
                 getArticles(false);
             });
         }
-        getUserStatus();
 
         $scope.toggleView = function(toggle) {
             $scope.articleView = toggle;
         };
 
         $scope.toggleReadArticle = function() {
-            overlay();
-            $scope.showReadArticle = $scope.showReadArticle ? false : true;
+            $scope.showReadArticle = !$scope.showReadArticle;
         };
 
         $scope.getMoreArticles = function() {
@@ -172,24 +159,67 @@
             } );
         };
 
+        function initArticleSwipe() {
+            var options = {
+                distance: 0,
+                resistance: 1.5,
+                ele: document.getElementById('read-article')
+            };
+
+            var hammertime = new Hammer(options.ele);
+            hammertime.get('pan').set({ direction: Hammer.DIRECTION_RIGHT });
+            hammertime.on( 'panright panend panstart', _pan );
+
+            var vertical = new Hammer(options.ele);
+            vertical.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
+
+            // only recognize the inner pan when the outer is failing.
+            // they both have a threshold of some px
+            hammertime.get('pan').requireFailure(vertical.get('pan'));
+
+            function _pan(ev) {
+                options.distance = ev.distance / options.resistance;
+
+                var threshhold = window.innerWidth * .70;
+
+                if(Hammer.DIRECTION_HORIZONTAL) {
+                    if (ev.type == 'panend' || env.type == 'pancancel') {
+                        options.ele.className += ' animate';
+                        options.ele.className = options.ele.className.replace('swiping', '').trim();
+                        if(ev.distance > (threshhold)) {
+                            options.ele.style.transform = options.ele.style.transform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
+                            options.ele.style.transform = options.ele.style.webkitTransform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
+                            $scope.showReadArticle = $scope.showReadArticle ? false : true;
+                            $scope.$apply();
+                            $timeout(function() {
+                                options.ele.style.transform = options.ele.style.transform = '';
+                                options.ele.style.transform = options.ele.style.webkitTransform = '';
+                            },500);
+                        }
+                        else {
+                            options.ele.style.transform = options.ele.style.transform = '';
+                            options.ele.style.transform = options.ele.style.webkitTransform = '';
+                        }
+
+                    }
+                    else if(ev.type == 'panright') {
+                        options.ele.className = options.ele.className.replace('animate', 'swiping').trim();
+                        options.ele.style.transform = options.ele.style.transform = 'translate3d( ' + options.distance + 'px,0' +
+                            ' ,0 )';
+                        options.ele.style.transform = options.ele.style.webkitTransform = 'translate3d( ' + options.distance + 'px,0 ,0 )';
+                    }
+                }
+
+            }
+        }
+
+        getUserStatus();
         Hammer.defaults.touchAction = 'auto';
         WebPullToRefresh.init( {
             loadingFunction: pullLoading,
             contentEl: document.getElementById('feed-stream')
         } );
-
-        var hammertime = new Hammer(document.getElementById('read-article'));
-        hammertime.get('pan').set({ direction: Hammer.DIRECTION_RIGHT });
-
-        hammertime.on( 'panright', _panRight );
-
-        function _panRight(e) {
-            console.log(e);
-            if(e.distance > 300) {
-                $scope.showReadArticle = false;
-                $scope.$apply();
-            }
-        }
+        initArticleSwipe();
 
     })
     .controller('welcomeController', function($scope,snugfeedUserService,$location) {
