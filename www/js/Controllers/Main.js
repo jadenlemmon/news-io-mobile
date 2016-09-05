@@ -23,7 +23,7 @@
         };
 
         $scope.showAddFeeds = function() {
-            $location.path('add-feeds');
+            $location.path('manage-feeds');
             $scope.toggleSettings();
         };
 
@@ -160,77 +160,28 @@
             getArticles(true, true);
         };
 
-        var pullLoading = function() {
-            return new Promise( function( resolve, reject ) {
-                getArticles(false, false).then(function() {
-                    resolve();
-                }, function() {
-                    reject();
-                });
-            } );
-        };
-
-        function initArticleSwipe() {
-            var options = {
-                distance: 0,
-                resistance: 1.5,
-                ele: document.getElementById('read-article')
-            };
-
-            var hammertime = new Hammer(options.ele);
-            hammertime.get('pan').set({ direction: Hammer.DIRECTION_RIGHT });
-            hammertime.on( 'panright panend panstart', _pan );
-
-            var vertical = new Hammer(options.ele);
-            vertical.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
-
-            // only recognize the inner pan when the outer is failing.
-            // they both have a threshold of some px
-            hammertime.get('pan').requireFailure(vertical.get('pan'));
-
-            function _pan(ev) {
-                options.distance = ev.distance / options.resistance;
-
-                var threshhold = window.innerWidth * .70;
-
-                if(Hammer.DIRECTION_HORIZONTAL) {
-                    if (ev.type == 'panend' || env.type == 'pancancel') {
-                        options.ele.className += ' animate';
-                        options.ele.className = options.ele.className.replace('swiping', '').trim();
-                        if(ev.distance > (threshhold)) {
-                            options.ele.style.transform = options.ele.style.transform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
-                            options.ele.style.transform = options.ele.style.webkitTransform = 'translate3d( ' + window.innerWidth + 'px,0 ,0 )';
-                            $scope.toggleReadArticle();
-                            $scope.$apply();
-                            $timeout(function() {
-                                options.ele.style.transform = options.ele.style.transform = '';
-                                options.ele.style.transform = options.ele.style.webkitTransform = '';
-                            },500);
-                        }
-                        else {
-                            options.ele.style.transform = options.ele.style.transform = '';
-                            options.ele.style.transform = options.ele.style.webkitTransform = '';
-                        }
-
-                    }
-                    else if(ev.type == 'panright') {
-                        options.ele.className = options.ele.className.replace('animate', 'swiping').trim();
-                        options.ele.style.transform = options.ele.style.transform = 'translate3d( ' + options.distance + 'px,0' +
-                            ' ,0 )';
-                        options.ele.style.transform = options.ele.style.webkitTransform = 'translate3d( ' + options.distance + 'px,0 ,0 )';
-                    }
-                }
-
-            }
-        }
-
+        //on load
         getUserStatus();
         Hammer.defaults.touchAction = 'auto';
         WebPullToRefresh.init( {
-            loadingFunction: pullLoading,
+            loadingFunction: function() {
+                return new Promise( function( resolve, reject ) {
+                    getArticles(false, false).then(function() {
+                        resolve();
+                    }, function() {
+                        reject();
+                    });
+                } );
+            },
             contentEl: document.getElementById('feed-stream')
         } );
-        initArticleSwipe();
+
+        Swipe.init({
+            finish: function() {
+                $scope.toggleReadArticle();
+                $scope.$apply();
+            }
+        });
 
     })
     .controller('welcomeController', function($scope,snugfeedUserService,$location) {
@@ -255,6 +206,7 @@
 
         var vm = this;
         vm.feeds = [];
+        vm.userFeeds = [];
         vm.loading = false;
 
         if(snugfeedUserService.getApiToken() == '') {
@@ -274,7 +226,25 @@
                 vm.feeds = resp.data.data;
             });
         }
+
+        function getUserFeeds() {
+            snugfeedUserService.getUserStatus().then(function(resp) {
+                vm.userFeeds = resp.data.user.feeds;
+            });
+        }
+
+        getUserFeeds();
         init();
+        $('.tabs.menu .item').tab({
+            onLoad: function(tab) {
+                if(tab == 'add') {
+                    init();
+                }
+                else {
+                    getUserFeeds();
+                }
+            }
+        });
 
         vm.search = function(term) {
             if(term.length > 3) searchTerm(term);
@@ -294,6 +264,19 @@
                 }
 
             });
+        };
+
+        vm.remove = function($index, feedID) {
+
+            vm.userFeeds[$index].loading = true;
+
+            snugfeedFeedsService.removeFeed(feedID).then(function(resp) {
+                vm.userFeeds[$index].loading = false;
+                if(resp.data.status == 'success') {
+                    vm.userFeeds[$index].removed = true;
+                    vm.userFeeds[$index].btnText = 'Removed';
+                }
+            })
         }
 
     })
@@ -308,7 +291,7 @@
                 controller: 'mainController'
             })
             .when('/add-feeds', {
-                templateUrl: 'views/add-feeds.html',
+                templateUrl: 'views/manage-feeds.html',
                 controller: 'addFeedsController',
                 controllerAs: 'vm'
             });

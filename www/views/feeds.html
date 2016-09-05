@@ -28,12 +28,12 @@
         </div>
     </div>
 
+    <div class="back-bar" ng-show="showReadArticle">
+        <i class="angle left icon" ng-click="toggleReadArticle()"></i>
+    </div>
+
     <div id="read-article" ng-show="showReadArticle">
-        <div class="back-bar">
-            <i class="angle left icon" ng-click="toggleReadArticle()"></i>
-        </div>
         <div class="ui container">
-            <!--<i class="remove circle outline icon pointer"></i>-->
             <div class="content">
                 <readarticlecomponent article="articleToRead"></readarticlecomponent>
             </div>

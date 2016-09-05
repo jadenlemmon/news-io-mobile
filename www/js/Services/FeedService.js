@@ -21,11 +21,16 @@
                 return $http.get(__env.apiUrl+"feed?term="+term+'&api_token='+snugfeedUserService.getApiToken());
             };
 
+            var removeFeed = function (id) {
+                return $http.delete(__env.apiUrl+"feed/"+id+'?api_token='+snugfeedUserService.getApiToken());
+            };
+
             return {
                 getFeeds: getFeeds,
                 updateFeeds: updateFeeds,
                 addFeed: addFeed,
-                searchForFeed: searchForFeed
+                searchForFeed: searchForFeed,
+                removeFeed: removeFeed
             };
 
         });

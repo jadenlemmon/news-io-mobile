@@ -1,0 +1,49 @@
+<div id="add-feeds">
+    <div class="ui container">
+        <a class="fluid ui button done" href="#feeds">Done</a>
+
+        <div class="ui two item tabs menu">
+            <a class="active item" data-tab="add">Add Feeds</a>
+            <a class="item" data-tab="remove">Remove Feeds</a>
+        </div>
+
+        <div class="ui tab active" data-tab="add">
+            <h3>Search or add from below</h3>
+            <div class="ui fluid icon input" ng-class="{'loading': vm.loading}">
+                <input type="text" placeholder="Search..." ng-model="searchText" ng-change="vm.search(searchText)">
+                <i class="search icon"></i>
+            </div>
+
+            <div class="ui middle aligned divided list">
+                <div class="item" ng-repeat="feed in vm.feeds">
+                    <div class="right floated content">
+                        <div class="ui button" ng-click="vm.add($index, feed.id)"
+                             ng-class="{'loading': feed.loading, 'positive': feed.added}">
+                            {{feed.btnText || 'Add'}}
+                            <i class="checkmark icon" ng-if="feed.added"></i></div>
+                    </div>
+                    <img class="ui avatar image" ng-src="{{feed.favicon_url}}">
+                    <div class="content">
+                        {{feed.source | limitTo:30}}...
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui tab" data-tab="remove">
+            <div class="ui middle aligned divided list">
+                <div class="item" ng-repeat="feed in vm.userFeeds">
+                    <div class="right floated content">
+                        <div class="ui button" ng-click="vm.remove($index, feed.id)"
+                             ng-class="{'loading': feed.loading, 'negative': feed.removed}">
+                            {{feed.btnText || 'Remove'}}
+                            <i class="checkmark icon" ng-if="feed.added"></i></div>
+                    </div>
+                    <img class="ui avatar image" ng-src="{{feed.favicon_url}}">
+                    <div class="content">
+                        {{feed.source | limitTo:30}}...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
