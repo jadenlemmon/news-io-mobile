@@ -1,28 +1,27 @@
 'use strict';
 
 (function(angular) {
-    angular.module('snugfeed.service.feeds', ['snugfeed.service.user'])
-        .service('snugfeedFeedsService', function ($http,snugfeedUserService) {
+    angular.module('snugfeed.service.feeds', ['env'])
+        .service('snugfeedFeedsService', function ($http,__env) {
 
             var getFeeds = function () {
-                return $http.get(__env.apiUrl+"feed?api_token="+snugfeedUserService.getApiToken());
+                return $http.get(__env.apiUrl+"feed");
             };
 
             var addFeed = function (data) {
-                data.api_token = snugfeedUserService.getApiToken();
                 return $http.post(__env.apiUrl+"feed", data);
             };
 
             var updateFeeds = function (feeds) {
-                return $http.put(__env.apiUrl+"feeds?api_token="+snugfeedUserService.getApiToken(), feeds);
+                return $http.put(__env.apiUrl+"feeds", feeds);
             };
 
             var searchForFeed = function(term) {
-                return $http.get(__env.apiUrl+"feed?term="+term+'&api_token='+snugfeedUserService.getApiToken());
+                return $http.get(__env.apiUrl+"feed?term="+term);
             };
 
             var removeFeed = function (id) {
-                return $http.delete(__env.apiUrl+"feed/"+id+'?api_token='+snugfeedUserService.getApiToken());
+                return $http.delete(__env.apiUrl+"feed/"+id);
             };
 
             return {

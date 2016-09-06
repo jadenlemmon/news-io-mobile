@@ -13,6 +13,12 @@
 
     var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'feeddropdowncomponent']);
 
+    app.config(function($httpProvider,snugfeedUserServiceProvider) {
+        $httpProvider.defaults.headers.common = {
+            'Authorization': 'Bearer '+snugfeedUserServiceProvider.$get().getApiToken()
+        };
+    });
+
     /**
      * Global Controller
      */

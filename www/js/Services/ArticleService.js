@@ -7,11 +7,11 @@
             var getArticles = function (page,ids) {
                 var query = page ? '&start='+page : '';
                 ids = '?ids='+ids.join();
-                return $http.get(__env.apiUrl+"articles"+ids+query+'&api_token='+snugfeedUserService.getApiToken());
+                return $http.get(__env.apiUrl+"articles"+ids+query);
             };
 
             var saveArticle = function(id) {
-                return $http.put(__env.apiUrl+"article/"+id+'?api_token='+snugfeedUserService.getApiToken());
+                return $http.put(__env.apiUrl+"article/"+id);
             };
 
             var getArticle = function(id) {
@@ -19,7 +19,7 @@
             };
 
             var deleteArticle = function(id) {
-                return $http.delete(__env.apiUrl+"article/"+id+'?api_token='+snugfeedUserService.getApiToken());
+                return $http.delete(__env.apiUrl+"article/"+id);
             };
 
             var getArticlesByIds = function(ids) {
@@ -27,7 +27,7 @@
             };
 
             var getSavedArticles = function() {
-                return $http.get(__env.apiUrl+"articles?saved=true&api_token="+snugfeedUserService.getApiToken());
+                return $http.get(__env.apiUrl+"articles?saved=true");
             };
 
             return {

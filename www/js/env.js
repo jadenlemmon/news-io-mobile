@@ -2,8 +2,12 @@
     window.__env = window.__env || {};
 
     // API url
-    window.__env.apiUrl = 'http://snugfeed.com/api/v1/';
-    //window.__env.apiUrl = 'http://news.io/api/v1/';
+    if(localStorage.getItem('api_url')) {
+        window.__env.apiUrl = 'http://news.io/api/v1/';
+    }
+    else {
+        window.__env.apiUrl = 'http://snugfeed.com/api/v1/';
+    }
 
     // Base url
     window.__env.baseUrl = '/';

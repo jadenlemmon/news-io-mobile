@@ -2,7 +2,7 @@
 
 (function(angular) {
     angular.module('snugfeed.service.user', ['env'])
-        .service('snugfeedUserService', function ($http,$q,$timeout) {
+        .service('snugfeedUserService', function ($http,$q,$timeout,__env) {
 
             var api_token = localStorage.getItem('api_token') || '';
 
@@ -34,7 +34,7 @@
             //};
 
             var getUserStatus = function () {
-                return $http.get(__env.apiUrl+'user/status?api_token='+api_token);
+                return $http.get(__env.apiUrl+'user/status');
             };
 
             return {
