@@ -4,15 +4,15 @@
     angular.module('snugfeed.service.user', ['env'])
         .service('snugfeedUserService', function ($http,$q,$timeout,__env) {
 
-            var api_token = localStorage.getItem('api_token') || '';
+            //var api_token = localStorage.getItem('api_token') || '';
 
             var setApiToken = function(token) {
                 localStorage.setItem('api_token', token);
-                api_token = token;
+                //api_token = token;
             };
 
             var getApiToken = function() {
-                return api_token;
+                return localStorage.getItem('api_token') || false;
             };
 
             var loginUser = function (login) {
@@ -22,7 +22,7 @@
             var logoutUser = function() {
                 var deferred = $q.defer();
                 localStorage.removeItem('api_token');
-                api_token = '';
+                //api_token = '';
                 $timeout(function() {
                     deferred.resolve();
                 },500);
@@ -43,7 +43,7 @@
                 getUserStatus: getUserStatus,
                 setApiToken: setApiToken,
                 getApiToken: getApiToken,
-                api_token: api_token,
+                //api_token: api_token,
                 logoutUser: logoutUser
             };
 

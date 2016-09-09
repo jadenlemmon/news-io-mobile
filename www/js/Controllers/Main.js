@@ -13,10 +13,26 @@
 
     var app = angular.module('app', ['article', 'snugfeed.service.articles', 'snugfeed.service.user', 'ngRoute', 'env', 'ngAnimate', 'managefeedscomponent', 'snugfeed.service.feeds', 'readarticlecomponent', 'feeddropdowncomponent']);
 
-    app.config(function($httpProvider,snugfeedUserServiceProvider) {
-        $httpProvider.defaults.headers.common = {
-            'Authorization': 'Bearer '+snugfeedUserServiceProvider.$get().getApiToken()
+    app.service('APIInterceptor', function($injector) {
+        var service = this;
+        service.request = function(config) {
+            var snugfeedUserService = $injector.get('snugfeedUserService');
+            var token = snugfeedUserService.getApiToken();
+            if(config.url.indexOf('api/v1') > 0 && token) {
+                config.headers = {
+                    'Authorization':'Bearer '+token,
+                    'Accept': 'application/json;odata=verbose'
+                };
+            }
+            return config;
         };
+        service.responseError = function(response) {
+            return response;
+        };
+    });
+
+    app.config(function($httpProvider) {
+        $httpProvider.interceptors.push('APIInterceptor');
     });
 
     /**
@@ -149,7 +165,7 @@
         function getUserStatus() {
             snugfeedUserService.getUserStatus().then(function(resp) {
                 $scope.user = resp.data.user;
-                $scope.user.initials = snug.generateAvatarInitials($scope.user.name);
+                //$scope.user.initials = snug.generateAvatarInitials($scope.user.name);
                 getArticles(false);
             });
         }
@@ -190,18 +206,18 @@
         });
 
     })
-    .controller('welcomeController', function($scope,snugfeedUserService,$location) {
+    .controller('welcomeController', function($scope,snugfeedUserService,$location,$http) {
 
         $scope.error = false;
 
-        if(snugfeedUserService.getApiToken() !== '') {
+        if(snugfeedUserService.getApiToken()) {
             $location.path( "/feeds" );
         }
 
         $scope.submitLogin = function($event,login) {
             $event.preventDefault();
             snugfeedUserService.loginUser(login).then(function(resp) {
-                snugfeedUserService.setApiToken(resp.data[0].api_token);
+                snugfeedUserService.setApiToken(resp.data.api_token);
                 $location.path( "/feeds" );
             },function() {
                 $scope.error = true;
