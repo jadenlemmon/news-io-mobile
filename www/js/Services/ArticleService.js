@@ -1,8 +1,8 @@
 'use strict';
 
-(function(angular) {
-    angular.module('snugfeed.service.articles', ['env', 'snugfeed.service.user'])
-        .service('snugfeedArticlesService', function($http,snugfeedUserService,__env) {
+(function() {
+    angular.module('app')
+        .service('snugfeedArticlesService', ['$http', 'snugfeedUserService', '__env', function($http,snugfeedUserService,__env) {
 
             var getArticles = function (page,ids) {
                 var query = page ? '&start='+page : '';
@@ -39,5 +39,5 @@
                 getArticlesByIds: getArticlesByIds
             };
 
-        });
-})(angular);
+        }]);
+})();

@@ -1,0 +1,47 @@
+<div id="register">
+    <div class="ui container">
+        <div class="img-contain">
+            <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-white.png">
+        </div>
+
+        <p>Give us a little info to get started.</p>
+
+        <form class="ui large form" ng-submit="vm.registerUser($event,register)" id="register-form" novalidate>
+            <div class="ui">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" ng-model="register.email" placeholder="E-mail address"
+                               autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="name" ng-model="register.name" placeholder="Username"
+                               autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" ng-model="register.password" placeholder="Password"
+                               autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password_confirmation" ng-model="register.password_confirmation"
+                               placeholder="Password" autocomplete="off" required>
+                    </div>
+                </div>
+                <button class="ui fluid large green submit button" type="submit" ng-class="{'loading': loading}" ng-disabled="disabled">Register</button>
+            </div>
+
+            <div class="ui error message"></div>
+        </form>
+
+        <a href="#/">Back</a>
+    </div>
+</div>

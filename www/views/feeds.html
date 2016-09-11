@@ -74,7 +74,15 @@
                         </div>
                     </div>
                 </div>
-                <button class="fluid ui button" ng-click="getMoreArticles()" ng-show="!showSaved">Load More</button>
+
+                <div id="no-feeds" ng-if="noFeeds">
+                    <h1>Oh No!</h1>
+                    <img src="https://s3-us-west-2.amazonaws.com/news-io/img/crying-no-feeds.png">
+                    <p>Looks like you haven't added any feeds yet!</p>
+                </div>
+
+                <button class="fluid ui button" ng-click="getMoreArticles()" ng-show="!showSaved && !noFeeds">Load
+                    More</button>
             </div>
         </div>
     </div>

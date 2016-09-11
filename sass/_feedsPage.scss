@@ -172,6 +172,17 @@ Settings Overlay
   }
 }
 
+#no-feeds {
+  text-align: center;
+  h1 {
+    margin-top: 30px;
+  }
+  img {
+    width: 50%;
+    margin: 20px 0;
+  }
+}
+
 /**
 Bottom Bar
 **/
@@ -190,25 +201,25 @@ Bottom Bar
     font-size: 30px;
     margin-top: 13px;
   }
-  #user-manage-menu .popout {
-    display: none;
-    padding: 15px;
-    position: absolute;
-    top: -86px;
-    background: #333;
-    height: 100px;
-    left: 14px;
-    width: 200px;
-  }
-  #user-manage-menu:hover .popout {
-    display: block;
-  }
-  .line {
-    line-height: 3.1em;
-    float: left;
-    margin-left: 15px;
-  }
-  .ui.slider.checkbox {
-    padding: 5px 3px 4px 13px;
-  }
+  //#user-manage-menu .popout {
+  //  display: none;
+  //  padding: 15px;
+  //  position: absolute;
+  //  top: -86px;
+  //  background: #333;
+  //  height: 100px;
+  //  left: 14px;
+  //  width: 200px;
+  //}
+  //#user-manage-menu:hover .popout {
+  //  display: block;
+  //}
+  //.line {
+  //  line-height: 3.1em;
+  //  float: left;
+  //  margin-left: 15px;
+  //}
+  //.ui.slider.checkbox {
+  //  padding: 5px 3px 4px 13px;
+  //}
 }

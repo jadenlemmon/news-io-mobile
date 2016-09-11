@@ -1,8 +1,8 @@
 'use strict';
 
-(function(angular) {
-    angular.module('snugfeed.service.user', ['env'])
-        .service('snugfeedUserService', function ($http,$q,$timeout,__env) {
+(function() {
+    angular.module('app')
+        .service('snugfeedUserService', ['$http', '$q', '$timeout', '__env', function($http,$q,$timeout,__env) {
 
             //var api_token = localStorage.getItem('api_token') || '';
 
@@ -28,10 +28,10 @@
                 },500);
                 return deferred.promise;
             };
-            //
-            //var registerUser = function (register) {
-            //    return $http.post('/auth/register', register);
-            //};
+
+            var registerUser = function (register) {
+                return $http.post(__env.apiUrl+'user/register', register);
+            };
 
             var getUserStatus = function () {
                 return $http.get(__env.apiUrl+'user/status');
@@ -39,7 +39,7 @@
 
             return {
                 loginUser: loginUser,
-                //registerUser: registerUser,
+                registerUser: registerUser,
                 getUserStatus: getUserStatus,
                 setApiToken: setApiToken,
                 getApiToken: getApiToken,
@@ -47,5 +47,5 @@
                 logoutUser: logoutUser
             };
 
-        });
-})(angular);
+        }]);
+})();

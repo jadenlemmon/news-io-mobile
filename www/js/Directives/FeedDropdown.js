@@ -1,8 +1,8 @@
 'use strict';
 
-(function(angular) {
+(function() {
 
-    angular.module('feeddropdowncomponent', []).directive('feeddropdowncomponent', function() {
+    angular.module('app').directive('feeddropdowncomponent', function() {
 
         function link(scope, element, attrs) {
             function init() {
@@ -46,4 +46,4 @@
         };
     });
 
-})(angular);
+})();

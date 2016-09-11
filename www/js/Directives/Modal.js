@@ -1,7 +1,7 @@
 'use strict';
 
-(function(angular) {
-    angular.module('modal', [])
+(function() {
+    angular.module('app')
         .directive('modal', function() {
             return {
                 restrict: 'E',
@@ -29,4 +29,4 @@
                 '</div>'
             };
         });
-})(angular);
+})();

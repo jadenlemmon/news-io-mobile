@@ -1,6 +1,6 @@
 'use strict';
 
-(function(angular) {
+(function() {
     function readArticleController($scope, $element, $attrs, $sce) {
 
         var vm = this;
@@ -14,7 +14,7 @@
         }
     }
 
-    angular.module('readarticlecomponent', ['ngSanitize']).component('readarticlecomponent', {
+    angular.module('app').component('readarticlecomponent', {
         controller: readArticleController,
         bindings: {article: '='},
         template: '' +
@@ -25,4 +25,4 @@
         '<p ng-if="$ctrl.article.article_img"><img ng-src="{{$ctrl.article.article_img}}"></p>' +
         '<p ng-bind-html="toTrustedHTML($ctrl.article.article_description)"></p>'
     });
-})(angular);
+})();

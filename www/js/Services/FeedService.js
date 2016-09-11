@@ -1,8 +1,8 @@
 'use strict';
 
-(function(angular) {
-    angular.module('snugfeed.service.feeds', ['env'])
-        .service('snugfeedFeedsService', function ($http,__env) {
+(function() {
+    angular.module('app')
+        .service('snugfeedFeedsService', ['$http', '__env', function ($http,__env) {
 
             var getFeeds = function () {
                 return $http.get(__env.apiUrl+"feed");
@@ -32,5 +32,5 @@
                 removeFeed: removeFeed
             };
 
-        });
-})(angular);
+        }]);
+})();

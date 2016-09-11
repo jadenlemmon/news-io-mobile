@@ -1,7 +1,7 @@
 'use strict';
 
-(function(angular) {
-    angular.module('managefeedscomponent', ['snugfeed.service.feeds']).directive('managefeedscomponent', function(snugfeedFeedsService) {
+(function() {
+    angular.module('app').directive('managefeedscomponent', ['snugfeedFeedsService', function(snugfeedFeedsService) {
 
         function link(scope, element, attrs) {
 
@@ -38,5 +38,5 @@
             '</div>' +
             '</div>'
         };
-    });
-})(angular);
+    }]);
+})();

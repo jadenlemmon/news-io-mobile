@@ -1,7 +1,7 @@
 'use strict';
 
-(function(angular) {
-    angular.module('article', ['ngSanitize']).directive('article', function($sce,$timeout,snugfeedArticlesService) {
+(function() {
+    angular.module('app').directive('article', ['$sce', '$timeout', 'snugfeedArticlesService', function($sce,$timeout,snugfeedArticlesService) {
 
         function link(scope, element, attrs) {
 
@@ -82,5 +82,5 @@
             '<p ng-bind-html="toTrustedHTML(article.article_description)" ng-if="!view"></p>' +
             '<p><a href="#" ng-click="readMore($event,article)">Read More</a></p>'
         };
-    });
-})(angular);
+    }]);
+})();

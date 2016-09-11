@@ -1,0 +1,31 @@
+<div id="login">
+    <div class="ui container center aligned">
+        <img src="https://s3-us-west-2.amazonaws.com/news-io/img/logo-white.png">
+
+        <div class="ui ignored error message" ng-show="error">
+            Your email or password is invalid!
+        </div>
+
+        <form class="ui large form" ng-submit="submitLogin($event,login)" id="login-form">
+            <div class="ui">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" ng-model="login.email" placeholder="E-mail address" autocomplete="off">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" ng-model="login.password" placeholder="Password" autocomplete="off">
+                    </div>
+                </div>
+                <button class="ui fluid large positive submit button" type="submit">Login</button>
+            </div>
+
+            <div class="ui error message"></div>
+        </form>
+
+        <a href="#/">Back</a>
+    </div>
+</div>

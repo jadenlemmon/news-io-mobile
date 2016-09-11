@@ -1,10 +1,35 @@
-#welcome {
-  background: #21BA45;
+#welcome, #register, #login {
+  background: #21BA45 url('https://s3-us-west-2.amazonaws.com/news-io/img/app_background.jpg') center/cover no-repeat;
   height: 100%;
 
   img {
     width: 100%;
-    margin-top: 200px;
-    max-width: 200px;
+    margin-top: 70px;
+    max-width: 300px;
+    margin-bottom: 25px;
+  }
+
+  #login-or-signup {
+    button {
+      margin: 20px 0;
+    }
+  }
+
+  a {
+    margin-top: 20px;
+    color: #fff;
+    display: block;
+  }
+}
+
+#welcome {
+  p, h2 {
+    color: #fff;
+  }
+  p {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 30px;
   }
 }
