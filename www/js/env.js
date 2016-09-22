@@ -3,7 +3,7 @@
 
     // API url
     if(localStorage.getItem('api_url')) {
-        window.__env.apiUrl = 'http://news.io/api/v1/';
+        window.__env.apiUrl = 'http://snug.local/api/v1/';
     }
     else {
         window.__env.apiUrl = 'http://snugfeed.com/api/v1/';
